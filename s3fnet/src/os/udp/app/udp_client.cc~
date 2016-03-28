@@ -15,6 +15,8 @@
 #include "env/namesvc.h"
 #include "net/net.h"
 
+#define UDP_DEBUG
+
 #ifdef UDP_DEBUG
 #define UDP_DUMP(x) printf("UDPCLT: "); x
 #else
@@ -76,6 +78,9 @@ class UDPClientSessionContinuation : public BSocketContinuation {
      called to print out the error. */
   virtual void failure() {
     UDPClientSession* client = (UDPClientSession*)owner;
+
+    client->decrease_aux();  //ASV
+    
     switch(status) {
     case UDP_CLIENT_SESSION_CONNECTING:
       UDP_DUMP(printf("UDPClientSessionContinuation::failure() on host \"%s\": "
@@ -280,6 +285,12 @@ void UDPClientSession::config(s3f::dml::Configuration *cfg)
 
 void UDPClientSession::init()
 {
+
+  counter = 1; // ASV
+  aux = 0;
+  received = 0;
+  REQ_max = 10;
+
   ProtocolSession::init();
 
   client_ip = inHost()->getDefaultIP();
@@ -305,6 +316,22 @@ void UDPClientSession::init()
 		  inHost()->nhi.toString(), getNowWithThousandSeparator(), start_time));
 
   main_proc(off_time_run_first, start_time);
+}
+
+
+//ASV function
+void UDPClientSession::decrease_aux()
+{
+	if (aux == 0)
+	{
+		printf("**ERROR: Aux is already 0\n");
+		return;
+	}
+	else
+	{
+		aux--;
+		printf("++One Req failed. Decreasing aux. Now it is %i\n", aux);
+	}
 }
 
 void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
@@ -334,11 +361,48 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
     }
   }
 
-  Host* owner_host = inHost();
+        printf("Aux is %i\n", aux);
+	if (aux == 0)
+	{
+		if (received == 1)
+		{
+			printf("Packet received. Success\n");
+			return;
+		}
+		else
+		{
+			if (counter > REQ_max)
+			{
+				printf("MAX limit reached. Aborting...\n");
+				return;
+			}
+			
+			aux = counter;
+			counter++;
+			
+			for (int i = 0; i < aux; i++)
+			{
+				printf("****RUN NUMBER %i\n", i+1);
+				Host* owner_host = inHost();
+				start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
+				start_timer_ac = new ProtocolCallbackActivation(this);
+				Activation ac (start_timer_ac);
+				HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
+			}
+
+		}
+	}
+	else
+	{
+		//null
+	}
+
+
+  /*Host* owner_host = inHost();
   start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
   start_timer_ac = new ProtocolCallbackActivation(this);
   Activation ac (start_timer_ac);
-  HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
+  HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );*/
 }
 
 void UDPClientSession::start_once()
@@ -431,6 +495,9 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 {
   cnt->rcvd_bytes += cnt->retval;
 
+
+  received = 1; //ASV
+
   UDP_DUMP(printf("[host=\"%s\"] %s: session_proc(), socket %d "
 		  "received %d bytes (%d bytes left).\n",
 		  inHost()->nhi.toString(), getNowWithThousandSeparator(),
@@ -466,7 +533,9 @@ void UDPClientSession::session_closed(UDPClientSessionContinuation* const cnt)
 {
   UDP_DUMP(printf("[host=\"%s\"] %s: session_proc(), socket %d connection closed.\n",
 		  inHost()->nhi.toString(), getNowWithThousandSeparator(), cnt->socket));
-  main_proc(true, 0);
+
+
+  main_proc(true, 0);  //*ASV*  ==> Commented so there is only one send
 
   // the continuation will be reclaimed after this
 }
@@ -527,6 +596,7 @@ void UDPClientSession::timeout(int sock)
 
 void UDPClientSession::start_timer_callback(Activation ac)
 {
+  
   UDPClientSession* client = (UDPClientSession*)((ProtocolCallbackActivation*)ac)->session;
   if(client->start_timer_called_once == true)
   {

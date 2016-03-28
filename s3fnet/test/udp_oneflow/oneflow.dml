@@ -1,6 +1,6 @@
 total_timeline 1	# total timeline (i.e. logical process) in the model.
 tick_per_second 6	# tick is the simulation time unit. E.g., 6 means one second has 10^6 ticks (i.e. the time unit is microsecond). O means the time unit is second.
-run_time 100		# simulation run-time in second. Actually it is the run-time of one epoch, and the system run one epoch in default.
+run_time 100000		# simulation run-time in second. Actually it is the run-time of one epoch, and the system run one epoch in default.
 seed 0			# seed for random number generator (a non-negative integer number). Simulation results are repeatable for the same seed.
 
 Net [
@@ -96,7 +96,7 @@ dict [
     start_time 1    			# earliest time to send request to server
     start_window 0   			# send request to server at a time randomly chosen
     					# from [start_time,start_time+start_window]
-    file_size 100000 			# requested file size (bytes)
+    file_size 200 			# requested file size (bytes)
     off_time 10      			# time to wait between sessions
     off_time_exponential false		# constant or exponential off time?
     off_time_run_first  false 		# whether 1st session starts with an off time

@@ -56,7 +56,8 @@ class UDPServerSessionContinuation : public BSocketContinuation {
     UDPServerSession* server = (UDPServerSession*)owner;
     switch(status) {
     case UDP_SERVER_SESSION_RECEIVING:
-      server->request_received(this);
+      server->request_handler(this);
+      //server->request_received(this);
       break;
     case UDP_SERVER_SESSION_CONNECTING:
       server->client_connected(this);
@@ -158,6 +159,13 @@ UDPServerSession::~UDPServerSession() {}
 
 void UDPServerSession::config(s3f::dml::Configuration *cfg)
 {
+
+  //**ASV**//
+  asv_proc = 1;
+  UDP_DUMP(printf("ASV IS ON\n"));
+  /*****/
+
+
   ProtocolSession::config(cfg);
 
   char* str = (char*)cfg->findSingle("port");
@@ -279,6 +287,21 @@ void UDPServerSession::handle_client(int ssock)
   UDPServerSessionContinuation* cnt = new UDPServerSessionContinuation(this, ssock);
   cnt->status = UDPServerSessionContinuation::UDP_SERVER_SESSION_RECEIVING;
   sm->recv(ssock, request_size, cnt->reqbuf, cnt);
+}
+
+
+/** ASV function **/
+void UDPServerSession::request_handler(UDPServerSessionContinuation* const cnt)
+{
+	if(asv_proc)
+	{
+		
+	}
+	else
+	{
+		request_received(cnt);
+	}
+
 }
 
 void UDPServerSession::request_received(UDPServerSessionContinuation* const cnt)

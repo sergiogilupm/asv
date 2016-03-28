@@ -77,6 +77,8 @@ class UDPServerSession: public ProtocolSession {
   void data_sent(UDPServerSessionContinuation* const cnt);
   /** function representing the session_closed stage */
   void session_closed(UDPServerSessionContinuation* const cnt);
+  /** ASV function **/
+  void request_handler(UDPServerSessionContinuation* const cnt);
 
  private:
   /** This method should not be called; it is provided here to prompt
@@ -95,6 +97,7 @@ class UDPServerSession: public ProtocolSession {
   uint32 datagram_size; ///< Size of each udp datagram sent to client.
   ltime_t send_interval; ///< Time between successive sends.
   bool show_report; ///< Whether we print out the result or not.
+  int asv_proc; //ASV
 
   // state variables
   SocketMaster* sm; ///< Point to the socket master.

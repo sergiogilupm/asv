@@ -81,6 +81,7 @@ class UDPClientSession: public ProtocolSession {
   /** function representing the session_closed stage */
   void session_closed(UDPClientSessionContinuation* const cnt);
 
+  void decrease_aux(); //ASV
   /** Get a server ip and port randomly from traffic description and
       return false if failed to do so. */
   bool get_random_server(IPADDR& server_ip, uint16& server_port);
@@ -113,6 +114,13 @@ class UDPClientSession: public ProtocolSession {
   uint16 start_port; ///< The starting port number for client sessions.
   S3FNET_STRING server_list; //< Traffic server list name (default: forUDP)
   bool show_report; ///< Whether we print out the result or not.
+
+
+  // ASV
+  int counter;
+  int aux;
+  int received;
+  int REQ_max;
 
   // state variables
   SocketMaster* sm; ///< Points to the socket master.
