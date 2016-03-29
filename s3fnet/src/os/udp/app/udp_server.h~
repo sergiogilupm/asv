@@ -77,6 +77,20 @@ class UDPServerSession: public ProtocolSession {
   void data_sent(UDPServerSessionContinuation* const cnt);
   /** function representing the session_closed stage */
   void session_closed(UDPServerSessionContinuation* const cnt);
+  /** ASV functions **/
+  void request_handler(UDPServerSessionContinuation* const cnt);
+
+  void UDPServerSession::init_array(int size);
+
+
+  void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt);
+
+
+  void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt,int pos);
+
+
+  void UDPServerSession::empty_array();
+
 
  private:
   /** This method should not be called; it is provided here to prompt

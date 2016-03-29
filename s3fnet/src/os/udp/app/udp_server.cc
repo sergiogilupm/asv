@@ -421,5 +421,31 @@ void UDPServerSession::start_timer_callback(Activation ac)
   server->start_on();
 }
 
+/** ASV IMPLEMENTATION FUNCTIONS **/
+
+void UDPServerSession::init_array(int size)
+{
+
+}
+
+
+void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt)
+{
+
+}
+
+
+void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt,int pos)
+{
+
+}
+
+
+void UDPServerSession::empty_array()
+{
+
+}
+
+
 }; // namespace s3fnet
 }; // namespace s3f
