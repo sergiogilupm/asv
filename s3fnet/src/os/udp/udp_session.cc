@@ -178,7 +178,7 @@ int UDPSession::recv(int length, byte* msg)
     // if no data available, the socket will be suspended waiting for
     // the DATA_AVAILABLE signal, we set the receive parameters so
     // that the socket will be notified when message arrives
-    assert(appl_rcvbuf == 0 && appl_rcvbuf_size == 0);
+    //assert(appl_rcvbuf == 0 && appl_rcvbuf_size == 0);  /* ASV */
     appl_rcvbuf = msg;
     appl_rcvbuf_size = length;
 

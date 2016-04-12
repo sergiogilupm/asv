@@ -1,0 +1,979 @@
+../../s3fnet *.dml 
+Input DML files:
+  oneflow-env.dml
+  oneflow-rt.dml
+  oneflow.dml
+UDPCLT: [host="0:1"] new udp client session.
+UDPCLT: [host="0:1"] config():
+  start_time=1000000, start_window=0, user_timeout=10000000, off_time=10000000,
+  off_time_run_first=0, off_time_exponential=0, fixed_server=0,
+  request_size=4, file_size=200, start_port=2048.
+UDPSVR: [host="1:1"] new udp server session.
+UDPSVR: ASV IS ON
+Reservoir initialized (Size 10)
+UDPSVR: [host="1:1"] config():
+  server_port=10, request_size=4, client_limit=0,
+  datagram_size=1000, send_interval=0.
+UDPCLT: [host="0:1"] init(), client_ip="10.10.0.2".
+UDPCLT: [host="0:1"] 000: main_proc(), starting client until 1000000.
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+UDPSVR: [host="1:1"] init(), server_ip="10.10.0.18".
+enter epoch window 1
+UDPSVR: [host="1:1"] 000: main_proc(), starting server.
+UDPCLT: [host="0:1"] 1,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 request sent.
+UDPCLT: [host="0:1"] 1,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 request sent.
++++Inserting REQ in pos 0
++++Inserting REQ in pos 1
+UDPCLT: [host="0:1"] 11,000,000: timeout(), socket 2 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 11,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+UDPCLT: [host="0:1"] 11,000,000: timeout(), socket 1 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 11,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 21,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 3 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 3 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 3 request sent.
+UDPCLT: [host="0:1"] 21,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 4 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 4 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 4 request sent.
+UDPCLT: [host="0:1"] 21,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 5 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 5 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 21,000,000: session_proc(), socket 5 request sent.
++++Inserting REQ in pos 2
++++Inserting REQ in pos 3
++++Inserting REQ in pos 4
+UDPCLT: [host="0:1"] 31,000,000: timeout(), socket 4 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 31,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+UDPCLT: [host="0:1"] 31,000,000: timeout(), socket 5 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 31,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 31,000,000: timeout(), socket 3 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 31,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 41,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 6 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 6 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 6 request sent.
+UDPCLT: [host="0:1"] 41,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 7 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 7 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 7 request sent.
+UDPCLT: [host="0:1"] 41,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 8 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 8 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 8 request sent.
+UDPCLT: [host="0:1"] 41,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 9 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 9 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 41,000,000: session_proc(), socket 9 request sent.
++++Inserting REQ in pos 5
++++Inserting REQ in pos 6
++++Inserting REQ in pos 7
++++Inserting REQ in pos 8
+UDPCLT: [host="0:1"] 51,000,000: timeout(), socket 6 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 51,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+UDPCLT: [host="0:1"] 51,000,000: timeout(), socket 9 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 51,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 51,000,000: timeout(), socket 7 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 51,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 51,000,000: timeout(), socket 8 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 51,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 61,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 10 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 10 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 10 request sent.
+UDPCLT: [host="0:1"] 61,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 11 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 11 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 11 request sent.
+UDPCLT: [host="0:1"] 61,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 12 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 12 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 12 request sent.
+UDPCLT: [host="0:1"] 61,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 13 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 13 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 13 request sent.
+UDPCLT: [host="0:1"] 61,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 14 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 14 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 61,000,000: session_proc(), socket 14 request sent.
++++Inserting REQ in pos 9
++++Inserting REQ in pos 10
+Array is full. Replacing
+*******rand is: 6
+Element in position 6 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 6
+Element in position 6 has been replaced
+UDPCLT: [host="0:1"] 71,000,000: timeout(), socket 13 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 71,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+UDPCLT: [host="0:1"] 71,000,000: timeout(), socket 14 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 71,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 71,000,000: timeout(), socket 11 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 71,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 71,000,000: timeout(), socket 12 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 71,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 71,000,000: timeout(), socket 10 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 71,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 15 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 15 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 15 request sent.
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 16 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 16 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 16 request sent.
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 17 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 17 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 17 request sent.
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 18 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 18 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 18 request sent.
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 19 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 19 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 19 request sent.
+UDPCLT: [host="0:1"] 81,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 20 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 20 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 81,000,000: session_proc(), socket 20 request sent.
+Array is full. Replacing
+*******rand is: 2
+Element in position 2 has been replaced
+Array is full. Replacing
+*******rand is: 1
+Element in position 1 has been replaced
+Array is full. Replacing
+*******rand is: 4
+Element in position 4 has been replaced
+Array is full. Replacing
+*******rand is: 0
+Element in position 0 has been replaced
+Array is full. Replacing
+*******rand is: 6
+Element in position 6 has been replaced
+Array is full. Replacing
+*******rand is: 3
+Element in position 3 has been replaced
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 20 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+****RUN NUMBER 7
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 17 abort.
+++One Req failed. Decreasing aux. Now it is 5
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 5
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 19 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 15 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 18 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 91,000,000: timeout(), socket 16 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 91,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+Timed window expired
++++++++++++++++++++++++Processing element in pos 0
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 1
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 2
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 4 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 3
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 5 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 4
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 6 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 5
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 7 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 6
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 8 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 7
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 9 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 8
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 10 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 9
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 11 connecting to client: "10.10.0.2:2067".
++++++++++++++++++++++++Processing element in pos 10
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 12 connecting to client: "10.10.0.2:2067".
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 6 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 6 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 8 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 8 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 9 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 9 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 7 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 7 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 4 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 4 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 5 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 5 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 10 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 10 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 12 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 12 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 11 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 11 connection closed.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 21 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 21 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 21 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 22 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 22 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 22 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 23 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 23 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 23 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 24 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 24 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 24 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 25 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 25 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 25 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 26 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 26 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 26 request sent.
+UDPCLT: [host="0:1"] 101,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 27 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 27 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 101,000,000: session_proc(), socket 27 request sent.
++++Inserting REQ in pos 0
++++Inserting REQ in pos 1
++++Inserting REQ in pos 2
++++Inserting REQ in pos 3
++++Inserting REQ in pos 4
++++Inserting REQ in pos 5
++++Inserting REQ in pos 6
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 27 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+****RUN NUMBER 7
+****RUN NUMBER 8
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 24 abort.
+++One Req failed. Decreasing aux. Now it is 6
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 6
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 26 abort.
+++One Req failed. Decreasing aux. Now it is 5
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 5
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 22 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 21 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 25 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 111,000,000: timeout(), socket 23 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 111,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 28 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 28 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 28 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 29 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 29 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 29 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 30 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 30 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 30 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 31 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 31 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 31 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 32 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 32 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 32 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 33 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 33 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 33 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 34 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 34 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 34 request sent.
+UDPCLT: [host="0:1"] 121,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 35 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 35 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 121,000,000: session_proc(), socket 35 request sent.
++++Inserting REQ in pos 7
++++Inserting REQ in pos 8
++++Inserting REQ in pos 9
++++Inserting REQ in pos 10
+Array is full. Replacing
+*******rand is: 1
+Element in position 1 has been replaced
+Array is full. Replacing
+*******rand is: 8
+Element in position 8 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+Array is full. Replacing
+*******rand is: 5
+Element in position 5 has been replaced
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 31 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+****RUN NUMBER 7
+****RUN NUMBER 8
+****RUN NUMBER 9
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 28 abort.
+++One Req failed. Decreasing aux. Now it is 7
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 7
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 32 abort.
+++One Req failed. Decreasing aux. Now it is 6
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 6
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 34 abort.
+++One Req failed. Decreasing aux. Now it is 5
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 5
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 29 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 30 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 33 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 131,000,000: timeout(), socket 35 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 131,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 36 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 36 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 36 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 37 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 37 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 37 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 38 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 38 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 38 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 39 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 39 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 39 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 40 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 40 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 40 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 41 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 41 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 41 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 42 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 42 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 42 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 43 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 43 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 43 request sent.
+UDPCLT: [host="0:1"] 141,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 44 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 44 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 141,000,000: session_proc(), socket 44 request sent.
+Array is full. Replacing
+*******rand is: 3
+Element in position 3 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+Array is full. Replacing
+*******rand is: 4
+Element in position 4 has been replaced
+Array is full. Replacing
+*******rand is: 9
+Element in position 9 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 2
+Element in position 2 has been replaced
+Array is full. Replacing
+*******rand is: 0
+Element in position 0 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 8
+Element in position 8 has been replaced
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 38 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+****RUN NUMBER 7
+****RUN NUMBER 8
+****RUN NUMBER 9
+****RUN NUMBER 10
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 44 abort.
+++One Req failed. Decreasing aux. Now it is 8
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 8
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 39 abort.
+++One Req failed. Decreasing aux. Now it is 7
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 7
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 42 abort.
+++One Req failed. Decreasing aux. Now it is 6
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 6
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 36 abort.
+++One Req failed. Decreasing aux. Now it is 5
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 5
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 37 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 43 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 41 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 151,000,000: timeout(), socket 40 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 151,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 45 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 45 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 45 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 46 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 46 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 46 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 47 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 47 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 47 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 48 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 48 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 48 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 49 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 49 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 49 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 50 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 50 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 50 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 51 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 51 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 51 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 52 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 52 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 52 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 53 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 53 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 53 request sent.
+UDPCLT: [host="0:1"] 161,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 54 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 54 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 161,000,000: session_proc(), socket 54 request sent.
+Array is full. Replacing
+*******rand is: 5
+Element in position 5 has been replaced
+Array is full. Replacing
+*******rand is: 0
+Element in position 0 has been replaced
+Array is full. Replacing
+*******rand is: 4
+Element in position 4 has been replaced
+Array is full. Replacing
+*******rand is: 6
+Element in position 6 has been replaced
+Array is full. Replacing
+*******rand is: 0
+Element in position 0 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 3
+Element in position 3 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 47 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+****RUN NUMBER 3
+****RUN NUMBER 4
+****RUN NUMBER 5
+****RUN NUMBER 6
+****RUN NUMBER 7
+****RUN NUMBER 8
+****RUN NUMBER 9
+****RUN NUMBER 10
+****RUN NUMBER 11
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 45 abort.
+++One Req failed. Decreasing aux. Now it is 9
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 9
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 54 abort.
+++One Req failed. Decreasing aux. Now it is 8
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 8
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 49 abort.
+++One Req failed. Decreasing aux. Now it is 7
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 7
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 52 abort.
+++One Req failed. Decreasing aux. Now it is 6
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 6
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 46 abort.
+++One Req failed. Decreasing aux. Now it is 5
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 5
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 48 abort.
+++One Req failed. Decreasing aux. Now it is 4
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 4
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 50 abort.
+++One Req failed. Decreasing aux. Now it is 3
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 3
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 53 abort.
+++One Req failed. Decreasing aux. Now it is 2
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 2
+UDPCLT: [host="0:1"] 171,000,000: timeout(), socket 51 abort.
+++One Req failed. Decreasing aux. Now it is 1
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 171,000,000: main_proc(), OFF (duration=10000000).
+Aux is 1
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 55 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 55 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 55 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 56 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 56 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 56 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 57 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 57 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 57 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 58 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 58 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 58 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 59 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 59 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 59 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 60 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 60 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 60 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 61 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 61 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 61 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 62 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 62 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 62 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 63 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 63 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 63 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 64 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 64 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 64 request sent.
+UDPCLT: [host="0:1"] 181,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 65 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 65 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 181,000,000: session_proc(), socket 65 request sent.
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 3
+Element in position 3 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+Array is full. Replacing
+*******rand is: 9
+Element in position 9 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+Array is full. Replacing
+*******rand is: 8
+Element in position 8 has been replaced
+Array is full. Replacing
+*******rand is: 2
+Element in position 2 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 7
+Element in position 7 has been replaced
+Array is full. Replacing
+*******rand is: 10
+Element in position 10 has been replaced
+Array is full. Replacing
+*******rand is: 4
+Element in position 4 has been replaced
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 55 abort.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 56 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 63 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 65 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 59 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 60 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 57 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 64 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 61 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 58 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+UDPCLT: [host="0:1"] 191,000,000: timeout(), socket 62 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 191,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+MAX limit reached. Aborting...
+completed epoch window, advanced time to 100000000000
+Finished
+-------------- runtime measurements ----------------
+Simulation run of 100000 sim seconds, with 1 timelines
+	configured without smart pointer events
+	configured without smart pointer activations
+total run time is 0.002305 seconds
+simulation run time is 0.001615 seconds
+accumulated usr time is 0.004 seconds
+accumulated sys time is 0 seconds
+total evts 599, work evts 371, sync evts 0
+total exec evt rate 370898, work evt rate 229721
+----------------------------------------------------

@@ -1,0 +1,75 @@
+../../s3fnet *.dml 
+Input DML files:
+  oneflow-env.dml
+  oneflow-rt.dml
+  oneflow.dml
+UDPCLT: [host="0:1"] new udp client session.
+UDPCLT: [host="0:1"] config():
+  start_time=1000000, start_window=0, user_timeout=1000000000, off_time=10000000,
+  off_time_run_first=0, off_time_exponential=0, fixed_server=0,
+  request_size=4, file_size=200, start_port=2048.
+UDPSVR: [host="1:1"] new udp server session.
+UDPSVR: ASV IS ON
+Reservoir initialized (Size 10)
+UDPSVR: [host="1:1"] config():
+  server_port=10, request_size=4, client_limit=0,
+  datagram_size=1000, send_interval=0.
+UDPCLT: [host="0:1"] init(), client_ip="10.10.0.2".
+UDPCLT: [host="0:1"] 000: main_proc(), starting client until 1000000.
+Aux is 0
+****RUN NUMBER 1
+****RUN NUMBER 2
+UDPSVR: [host="1:1"] init(), server_ip="10.10.0.18".
+enter epoch window 1
+UDPSVR: [host="1:1"] 000: main_proc(), starting server.
+UDPCLT: [host="0:1"] 1,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 1 request sent.
+UDPCLT: [host="0:1"] 1,000,000: get_random_server(), selected server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: main_proc(), ON.
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 connecting to server: "10.10.0.18:10".
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 sending request (request_size=4, file_size=200).
+UDPCLT: [host="0:1"] 1,000,000: session_proc(), socket 2 request sent.
++++Inserting REQ in pos 0
++++Inserting REQ in pos 1
+Timed window expired
++++++++++++++++++++++++Processing element in pos 0
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 connecting to client: "10.10.0.2:2049".
++++++++++++++++++++++++Processing element in pos 1
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 1 received request (request_size=4, file_size=200).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 connecting to client: "10.10.0.2:2049".
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 2 connection closed.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 sent 200 bytes (0 bytes left).
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), finished sending 200 bytes.
+UDPSVR: [host="1:1"] 100,000,000: session_proc(), socket 3 connection closed.
+++One Req failed. Decreasing aux. Now it is 0
+UDPCLT: [host="0:1"] 100,405,475: session_proc(), socket 2 received 200 bytes (0 bytes left).
+100,405,475: UDP client "10.10.0.2" downloaded 200 bytes from server "10.10.0.18", throughput 0.016096 Kb/s.
+UDPCLT: [host="0:1"] 100,405,475: session_proc(), socket 2 connection closed.
+UDPCLT: [host="0:1"] 100,405,475: main_proc(), OFF (duration=10000000).
+Aux is 0
+Packet received. Success
+UDPCLT: [host="0:1"] 1,001,000,000: timeout(), socket 1 abort.
+**ERROR: Aux is already 0
+UDPCLT: UDPClientSessionContinuation::failure() on host "0:1": failed to receive data.
+UDPCLT: [host="0:1"] 1,001,000,000: main_proc(), OFF (duration=10000000).
+Aux is 0
+Packet received. Success
+completed epoch window, advanced time to 100000000000
+Finished
+-------------- runtime measurements ----------------
+Simulation run of 100000 sim seconds, with 1 timelines
+	configured without smart pointer events
+	configured without smart pointer activations
+total run time is 0.000997 seconds
+simulation run time is 0.000226 seconds
+accumulated usr time is 0.004 seconds
+accumulated sys time is 0 seconds
+total evts 31, work evts 19, sync evts 0
+total exec evt rate 137168, work evt rate 84070.8
+----------------------------------------------------

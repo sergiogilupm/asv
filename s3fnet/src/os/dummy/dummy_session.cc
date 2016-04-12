@@ -1,5 +1,5 @@
 /**
- * \file dummy_session.cc
+ * \file dummy_client.cc
  * \brief Source file for the DummySession class.
  *
  * authors : Dong (Kevin) Jin
@@ -14,6 +14,7 @@
 #include "os/ipv4/ip_interface.h" // defines IPPushOption and IPOptionToAbove classes
 #include "net/net.h"
 #include "env/namesvc.h"
+
 
 #ifdef DUMMY_DEBUG
 #define DUMMY_DUMP(x) printf("DUMMY: "); x
@@ -115,7 +116,7 @@ void DummySession::init()
 {
   // the same method at the parent class must be called
   ProtocolSession::init();
-
+  printf("VIVAAAAA LAS VEGAS.\n")
   // initialize the session-related variables here
   DUMMY_DUMP(printf("Dummy session is initialized.\n"));
   pkt_seq_num = 0;

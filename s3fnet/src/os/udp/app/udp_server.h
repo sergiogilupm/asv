@@ -61,6 +61,17 @@ class UDPServerSession: public ProtocolSession {
   /** Storing the data for the callback function. In this case, the UDPServerSession object is stored. */
   ProtocolCallbackActivation* start_timer_ac;
 
+  /*ASV*/
+  /** Provide call_back functionality for implementing the start timer in the UDPServerSession
+  *  this S3F process is used by waitFor() function */
+  Process* start_timer_callback_window;
+  /** The callback function registered with the start_timer_callback_proc */
+  void end_of_timed_window(Activation ac);
+  /** Storing the data for the callback function. In this case, the UDPServerSession object is stored. */
+  ProtocolCallbackActivation* start_timer_ac_window;
+
+
+
  protected:
   // functions representing different stages
   /** start the UDP server */
@@ -83,13 +94,16 @@ class UDPServerSession: public ProtocolSession {
   void init_array(int size);
 
 
-  void add_to_array(UDPServerSessionContinuation* const cnt);
+  void add_to_array(UDPServerSessionContinuation* cnt);
 
 
   void replace_in_array(UDPServerSessionContinuation* const cnt,int pos);
 
 
   void empty_array();
+
+  void process_elements();
+ 
 
 
  private:
@@ -109,12 +123,19 @@ class UDPServerSession: public ProtocolSession {
   uint32 datagram_size; ///< Size of each udp datagram sent to client.
   ltime_t send_interval; ///< Time between successive sends.
   bool show_report; ///< Whether we print out the result or not.
+
+  /* ASV */
   int asv_proc; //ASV
+  int reservoir_size;
+  //UDPServerSessionContinuation* reservoir;
+  int array_iter;
 
   // state variables
   SocketMaster* sm; ///< Point to the socket master.
   IPADDR server_ip; ///< The ip address of this server (interface 0).
   uint32 nclients; ///< Number of clients currently connected.
+
+  static UDPServerSession instance; //asv
 };
 
 /** storing the data for the callback function

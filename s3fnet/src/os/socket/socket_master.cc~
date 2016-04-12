@@ -10,7 +10,6 @@
 #include "net/host.h"
 #include "os/base/protocols.h"
 
-#define SOCK_DEBUG
 
 #ifdef SOCK_DEBUG
 #define SOCK_DUMP(x) printf("SOCK: "); x

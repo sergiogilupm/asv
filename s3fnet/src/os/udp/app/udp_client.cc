@@ -380,7 +380,7 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
 			aux = counter;
 			counter++;
 			
-			for (int i = 0; i < aux; i++)
+			for (int i = 0; i < counter; i++)
 			{
 				printf("****RUN NUMBER %i\n", i+1);
 				Host* owner_host = inHost();
@@ -497,6 +497,7 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 
 
   received = 1; //ASV
+  decrease_aux();
 
   UDP_DUMP(printf("[host=\"%s\"] %s: session_proc(), socket %d "
 		  "received %d bytes (%d bytes left).\n",
