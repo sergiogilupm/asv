@@ -84,6 +84,7 @@ class UDPClientSession: public ProtocolSession {
   void decrease_aux(); //ASV
   /** Get a server ip and port randomly from traffic description and
       return false if failed to do so. */
+
   bool get_random_server(IPADDR& server_ip, uint16& server_port);
 
   /** Called if the file transfer takes too long. */
@@ -120,7 +121,11 @@ class UDPClientSession: public ProtocolSession {
   int counter;
   int aux;
   int received;
-  int REQ_max;
+  int j;
+  int J_MAX;
+
+  //int REQ_max;
+
 
   // state variables
   SocketMaster* sm; ///< Points to the socket master.

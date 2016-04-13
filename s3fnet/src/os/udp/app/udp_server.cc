@@ -159,16 +159,16 @@ UDPServerSession::UDPServerSession(ProtocolGraph* graph) :
 
 UDPServerSession::~UDPServerSession() {}
 
-UDPServerSessionContinuation* reservoir[10];  //ASV reservoir
+UDPServerSessionContinuation* reservoir[1024];  //ASV reservoir
 
 void UDPServerSession::config(s3f::dml::Configuration *cfg)
 {
 
   //**ASV**//
   asv_proc = 1;
-  reservoir_size = 10;
-  UDP_DUMP(printf("ASV IS ON\n"));
-  init_array(10);
+  processing_reservoir = 0;
+  reservoir_size = 1024;
+  init_array(reservoir_size);
   /*****/
 
 
@@ -258,12 +258,6 @@ void UDPServerSession::init()
   UDP_DUMP(printf("[host=\"%s\"] init(), server_ip=\"%s\".\n",
 		  inHost()->nhi.toString(), IPPrefix::ip2txt(server_ip)));
 
-  /*ASV*/
-
-
-
-  /******/
-
   Host* owner_host = inHost();
   start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPServerSession::start_timer_callback);
   start_timer_ac = new ProtocolCallbackActivation(this);
@@ -293,15 +287,25 @@ void UDPServerSession::start_on()
     return;
   }
   
+  /***** ASV ****/
   Host* owner_host = inHost();
   start_timer_callback_window = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPServerSession::end_of_timed_window);
   start_timer_ac_window = new ProtocolCallbackActivation(this);
   Activation ac (start_timer_ac_window);
-  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 100000000, inHost()->tie_breaking_seed ); //currently the starting time is 0
+  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 10000000, inHost()->tie_breaking_seed ); //currently the starting time is 0
   handle_client(ssock);
+
+  // 6 ceros
 }
 
-
+void UDPServerSession::restart_timer()
+{
+  Host* owner_host = inHost();
+  start_timer_callback_window = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPServerSession::end_of_timed_window);
+  start_timer_ac_window = new ProtocolCallbackActivation(this);
+  Activation ac (start_timer_ac_window);
+  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 10000000, inHost()->tie_breaking_seed ); //currently the starting time is 0
+}
 
 
 void UDPServerSession::handle_client(int ssock)
@@ -318,7 +322,10 @@ void UDPServerSession::request_handler(UDPServerSessionContinuation* const cnt)
 	if(asv_proc)
 	{
 
-		//printf("****Storing UDP Session with info: client_ip: %i, client_port: %i\n", cnt->client_ip, cnt->client_port);
+		if (array_iter == 0)
+		{
+			restart_timer();
+		}
 
 		add_to_array(cnt);
  		
@@ -459,7 +466,15 @@ void UDPServerSession::start_timer_callback(Activation ac)
   server->start_on();
 }
 
+void UDPServerSession::block_reservoir()
+{
+	processing_reservoir = 1;
+}
 
+void UDPServerSession::release_reservoir()
+{
+	processing_reservoir = 0;
+}
 
 /** ASV IMPLEMENTATION FUNCTIONS **/
 
@@ -469,7 +484,13 @@ void UDPServerSession::end_of_timed_window(Activation ac)
   //server->start_on();
   printf("Timed window expired\n");
   UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
+
+  server->block_reservoir();
   server->process_elements();
+  server->release_reservoir();
+
+  /* Restarting the timer (New timed window) */
+  //server->restart_timer();
 }
 
 
@@ -481,36 +502,40 @@ void UDPServerSession::init_array(int size)
 }
 
 
-
 void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt)
 {
-	if(array_iter > reservoir_size)
+
+	if (processing_reservoir)
 	{
-		printf("Array is full. Replacing\n");
-		//process_elements();
-
-
-		int pos = rand() % array_iter;
-		printf("*******rand is: %i\n", pos);
-		replace_in_array(cnt, pos);
-		
+		UDP_DUMP(printf("*Reservoir is being processed. Request discarded\n"));
 	}
 	else
 	{
-		printf("+++Inserting REQ in pos %i\n", array_iter);
-		reservoir[array_iter] = cnt;
-		array_iter++;
+		if(array_iter > reservoir_size)
+		{
+			replace_in_array(cnt);	
+		}
+		else
+		{
+			printf("+++Inserting REQ in pos %i\n", array_iter);
+			reservoir[array_iter] = cnt;
+			array_iter++;
+		}
 	}
+
 
 }
 
 
 
-void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt,int pos)
+void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt)
 {
 
+	/* TODO: Probability of replacing the req with a req inside the reservoir */
+
+	int pos = rand() % array_iter;
+	UDP_DUMP(printf("Replacing request in position %i of the reservoir\n", pos));
 	reservoir[pos] = cnt;
-	printf("Element in position %i has been replaced\n", pos);
 }
 
 

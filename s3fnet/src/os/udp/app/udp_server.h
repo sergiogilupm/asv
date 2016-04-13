@@ -97,12 +97,17 @@ class UDPServerSession: public ProtocolSession {
   void add_to_array(UDPServerSessionContinuation* cnt);
 
 
-  void replace_in_array(UDPServerSessionContinuation* const cnt,int pos);
+  void replace_in_array(UDPServerSessionContinuation* const cnt);
 
+  void restart_timer();
 
   void empty_array();
 
   void process_elements();
+
+  void block_reservoir();
+
+  void release_reservoir();
  
 
 
@@ -129,6 +134,7 @@ class UDPServerSession: public ProtocolSession {
   int reservoir_size;
   //UDPServerSessionContinuation* reservoir;
   int array_iter;
+  int processing_reservoir;
 
   // state variables
   SocketMaster* sm; ///< Point to the socket master.

@@ -288,8 +288,7 @@ void UDPClientSession::init()
 
   counter = 1; // ASV
   aux = 0;
-  received = 0;
-  REQ_max = 4;
+  P_max = 1024;
 
   ProtocolSession::init();
 
@@ -362,34 +361,26 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
   }
 
         printf("Aux is %i\n", aux);
+
 	if (aux == 0)
 	{
-		if (received == 1)
+		/*if (counter > REQ_max)
 		{
-			printf("Packet received. Success\n");
+			printf("MAX limit reached. Aborting...\n");
 			return;
-		}
-		else
+		}*/
+		
+		//aux = counter;
+		//counter++;
+		
+		for (int i = 0; i < P_max; i++)   // Sending the flood of requests
 		{
-			if (counter > REQ_max)
-			{
-				printf("MAX limit reached. Aborting...\n");
-				return;
-			}
-			
-			aux = counter;
-			counter++;
-			
-			for (int i = 0; i < counter; i++)
-			{
-				printf("****RUN NUMBER %i\n", i+1);
-				Host* owner_host = inHost();
-				start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
-				start_timer_ac = new ProtocolCallbackActivation(this);
-				Activation ac (start_timer_ac);
-				HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
-			}
-
+			printf("****RUN NUMBER %i\n", i+1);
+			Host* owner_host = inHost();
+			start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
+			start_timer_ac = new ProtocolCallbackActivation(this);
+			Activation ac (start_timer_ac);
+			HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
 		}
 	}
 	else
