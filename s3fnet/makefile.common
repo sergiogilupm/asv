@@ -257,7 +257,8 @@ UDP_HDRFILES = \
 	$(SRCDIR)/os/udp/udp_master.h \
 	$(SRCDIR)/os/udp/udp_session.h \
 	$(SRCDIR)/os/udp/app/udp_client.h \
-	$(SRCDIR)/os/udp/app/udp_server.h
+	$(SRCDIR)/os/udp/app/udp_server.h \
+	$(SRCDIR)/os/udp/app/udp_attacker.h
 	#$(SRCDIR)/os/udp/app/blocking_udp_client.h \
 	#$(SRCDIR)/os/udp/app/blocking_udp_server.h \
 	#$(SRCDIR)/os/udp/app/blocking_udp_streamclient.h \
@@ -268,7 +269,8 @@ UDP_SRCFILES = \
 	$(SRCDIR)/os/udp/udp_master.cc \
 	$(SRCDIR)/os/udp/udp_session.cc \
 	$(SRCDIR)/os/udp/app/udp_client.cc \
-	$(SRCDIR)/os/udp/app/udp_server.cc
+	$(SRCDIR)/os/udp/app/udp_server.cc \
+	$(SRCDIR)/os/udp/app/udp_attacker.cc
 	#$(SRCDIR)/os/udp/app/blocking_udp_client.cxx \
 	#$(SRCDIR)/os/udp/app/blocking_udp_server.cxx \
 	#$(SRCDIR)/os/udp/app/blocking_udp_streamclient.cxx \

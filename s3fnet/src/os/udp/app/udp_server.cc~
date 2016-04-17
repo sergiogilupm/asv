@@ -13,12 +13,17 @@
 #include "os/base/protocols.h"
 #include  <signal.h>
 
-#define UDP_DEBUG
 
 #ifdef UDP_DEBUG
 #define UDP_DUMP(x) printf("UDPSVR: "); x
 #else
 #define UDP_DUMP(x)
+#endif
+
+#ifdef UDP_DEBUG2
+#define UDP_DUMP2(x) printf("UDPSVR: "); x
+#else
+#define UDP_DUMP2(x)
 #endif
 
 #define DEFAULT_SERVER_PORT 20
@@ -159,7 +164,7 @@ UDPServerSession::UDPServerSession(ProtocolGraph* graph) :
 
 UDPServerSession::~UDPServerSession() {}
 
-UDPServerSessionContinuation* reservoir[1024];  //ASV reservoir
+UDPServerSessionContinuation* reservoir[600];  //ASV reservoir
 
 void UDPServerSession::config(s3f::dml::Configuration *cfg)
 {
@@ -167,7 +172,7 @@ void UDPServerSession::config(s3f::dml::Configuration *cfg)
   //**ASV**//
   asv_proc = 1;
   processing_reservoir = 0;
-  reservoir_size = 1024;
+  reservoir_size = 600;
   init_array(reservoir_size);
   /*****/
 
@@ -292,7 +297,7 @@ void UDPServerSession::start_on()
   start_timer_callback_window = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPServerSession::end_of_timed_window);
   start_timer_ac_window = new ProtocolCallbackActivation(this);
   Activation ac (start_timer_ac_window);
-  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 1000000, inHost()->tie_breaking_seed ); //currently the starting time is 0
+  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 40000, inHost()->tie_breaking_seed ); //currently the starting time is 0
   handle_client(ssock);
 
   // 6 ceros
@@ -304,7 +309,7 @@ void UDPServerSession::restart_timer()
   start_timer_callback_window = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPServerSession::end_of_timed_window);
   start_timer_ac_window = new ProtocolCallbackActivation(this);
   Activation ac (start_timer_ac_window);
-  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 1000000, inHost()->tie_breaking_seed ); //currently the starting time is 0
+  HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 40000, inHost()->tie_breaking_seed ); //currently the starting time is 0
 }
 
 
@@ -482,7 +487,7 @@ void UDPServerSession::end_of_timed_window(Activation ac)
 {
   //UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
   //server->start_on();
-  printf("Timed window expired\n");
+  UDP_DUMP2(printf("Timed window expired\n"));
   UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
 
   server->block_reservoir();
@@ -497,7 +502,7 @@ void UDPServerSession::end_of_timed_window(Activation ac)
 void UDPServerSession::init_array(int size)
 {
 	//reservoir = (UDPServerSessionContinuation*) malloc (size * sizeof(UDPServerSessionContinuation*));
-	printf("Reservoir initialized (Size %i)\n",size);
+	UDP_DUMP2(printf("Reservoir initialized (Size %i)\n",size));
 	array_iter = 0;
 }
 
@@ -507,7 +512,11 @@ void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt)
 
 	if (processing_reservoir)
 	{
-		UDP_DUMP(printf("*Reservoir is being processed. Request discarded\n"));
+		UDP_DUMP2(printf("*Reservoir is being processed. Request discarded\n"));
+
+		// the server will close the discarded connection.
+  		cnt->status = UDPServerSessionContinuation::UDP_SERVER_SESSION_CLOSING;
+  		sm->close(cnt->client_socket, cnt);
 	}
 	else
 	{
@@ -517,7 +526,7 @@ void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt)
 		}
 		else
 		{
-			printf("+++Inserting REQ in pos %i\n", array_iter);
+			UDP_DUMP2(printf("+++Inserting REQ in pos %i\n", array_iter));
 			reservoir[array_iter] = cnt;
 			array_iter++;
 		}
@@ -535,7 +544,13 @@ void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt)
 
 	int pos = rand() % array_iter;
 	UDP_DUMP(printf("Replacing request in position %i of the reservoir\n", pos));
+
+	UDPServerSessionContinuation* const discarded_req = reservoir[pos];
 	reservoir[pos] = cnt;
+
+  	// the server will close the discarded connection.
+  	discarded_req->status = UDPServerSessionContinuation::UDP_SERVER_SESSION_CLOSING;
+  	sm->close(discarded_req->client_socket, discarded_req);
 }
 
 
@@ -552,7 +567,7 @@ void UDPServerSession::process_elements()
 {
 	for (int i = 0; i < array_iter; i++)
 	{
-		printf("+++++++++++++++++++++++Processing element in pos %i\n", i);
+		UDP_DUMP2(printf("+++++++++++++++++++++++Processing element in pos %i\n", i));
 		//request_received(reservoir[i]);
 		client_connected(reservoir[i]);
 	}

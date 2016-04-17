@@ -1,0 +1,42 @@
+
+
+
+   host [ idrange [from 50 to 99]
+     graph [
+	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPClient" _extends .dict.udp_client_setup ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
+        ProtocolSession [ name ip use "S3F.OS.IP" ]
+      ]
+      interface [ id 0 _extends .dict.iface ]
+    ]
+
+   host [ idrange [from 100 to 149]
+     graph [
+	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPClient" _extends .dict.udp_client_setup ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
+        ProtocolSession [ name ip use "S3F.OS.IP" ]
+      ]
+      interface [ id 0 _extends .dict.iface ]
+    ]
+
+   host [ idrange [from 150 to 199]
+     graph [
+	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPClient" _extends .dict.udp_client_setup ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
+        ProtocolSession [ name ip use "S3F.OS.IP" ]
+      ]
+      interface [ id 0 _extends .dict.iface ]
+    ]
+
+   host [ idrange [from 200 to 249]
+     graph [
+	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPClient" _extends .dict.udp_client_setup ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
+        ProtocolSession [ name ip use "S3F.OS.IP" ]
+      ]
+      interface [ id 0 _extends .dict.iface ]
+    ]

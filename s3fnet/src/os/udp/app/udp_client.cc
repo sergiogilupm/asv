@@ -14,13 +14,24 @@
 #include "os/base/protocols.h"
 #include "env/namesvc.h"
 #include "net/net.h"
+#include <iostream>
+#include <fstream>
+
 
 #define UDP_DEBUG
+#define UDP_DEBUG2
+
 
 #ifdef UDP_DEBUG
 #define UDP_DUMP(x) printf("UDPCLT: "); x
 #else
 #define UDP_DUMP(x)
+#endif
+
+#ifdef UDP_DEBUG2
+#define UDP_DUMP2(x) printf("UDPCLT2: "); x
+#else
+#define UDP_DUMP2(x)
 #endif
 
 #define DEFAULT_SERVER_PORT     20
@@ -79,7 +90,7 @@ class UDPClientSessionContinuation : public BSocketContinuation {
   virtual void failure() {
     UDPClientSession* client = (UDPClientSession*)owner;
 
-    client->decrease_aux();  //ASV
+    //client->decrease_aux();  //ASV
     
     switch(status) {
     case UDP_CLIENT_SESSION_CONNECTING:
@@ -110,7 +121,7 @@ class UDPClientSessionContinuation : public BSocketContinuation {
     	client->sm->abort(socket);
       }
 
-      client->main_proc(true, 0);
+      //client->main_proc(true, 0);  //ASV commented
       break;
     }
     case UDP_CLIENT_SESSION_CLOSING:
@@ -290,6 +301,8 @@ void UDPClientSession::init()
   aux = 0;
   received = 0;
 
+  total_bandwidth = 0;  
+
   j = 0;
   J_MAX = 1024;
 
@@ -319,7 +332,53 @@ void UDPClientSession::init()
   UDP_DUMP(printf("[host=\"%s\"] %s: main_proc(), starting client until %ld.\n",
 		  inHost()->nhi.toString(), getNowWithThousandSeparator(), start_time));
 
-  main_proc(off_time_run_first, start_time);
+
+  /***** ASV ****/
+  Host* owner_host = inHost();
+  start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::end_of_request_wave);
+  start_timer_ac = new ProtocolCallbackActivation(this);
+  Activation ac (start_timer_ac);
+  HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, off_time_run_first, owner_host->tie_breaking_seed );
+
+
+  //main_proc(off_time_run_first, start_time);
+}
+
+
+
+void UDPClientSession::end_of_request_wave(Activation ac)
+{
+  //UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
+  //server->start_on();
+  UDP_DUMP2(printf("Client request wave finished\n"));
+  UDPClientSession* client = (UDPClientSession*)((ProtocolCallbackActivation*)ac)->session;
+
+
+  /*Restarting timer for next wave */
+
+  	if(received)
+	{
+		UDP_DUMP2(printf("Request processed\n"));
+	}
+	else
+	{
+		UDP_DUMP2(printf("No request processed. Sending next wave...\n"));
+		client->restart_timer();
+	}
+  
+}
+
+
+void UDPClientSession::restart_timer()
+{
+
+  Host* owner_host = inHost();
+  start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::end_of_request_wave);
+  start_timer_ac = new ProtocolCallbackActivation(this);
+  Activation ac (start_timer_ac);
+  HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, user_timeout , owner_host->tie_breaking_seed );
+
+  main_proc(true,0);
 }
 
 
@@ -328,13 +387,13 @@ void UDPClientSession::decrease_aux()
 {
 	if (aux == 0)
 	{
-		printf("**ERROR: Aux is already 0\n");
+		UDP_DUMP2(printf("**ERROR: Aux is already 0\n"));
 		return;
 	}
 	else
 	{
 		aux--;
-		printf("++One Req failed. Decreasing aux. Now it is %i\n", aux);
+		UDP_DUMP2(printf("++One Req failed. Decreasing aux. Now it is %i\n", aux));
 	}
 }
 
@@ -365,24 +424,24 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
     }
   }
 
-        printf("Aux is %i\n", aux);
-	if (aux == 0)
-	{
+        UDP_DUMP2(printf("Aux is %i\n", aux));
+	//if (aux == 0)
+	//{
 
 		/*** Setting up j */
 		counter = pow(2,j);
 
 
-		if (received == 1)
+		/*if (received == 1)
 		{
-			printf("Packet received. Success\n");
+			UDP_DUMP2(printf("Packet received. Success\n"));
 			return;
 		}
 		else
-		{
+		{*/
 			if (counter > J_MAX)
 			{
-				printf("MAX limit reached. Aborting...\n");
+				UDP_DUMP2(printf("MAX limit reached. Aborting...\n"));
 				return;
 			}
 			
@@ -391,7 +450,7 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
 			
 			for (int i = 0; i < counter; i++)
 			{
-				printf("****RUN NUMBER %i\n", i+1);
+				UDP_DUMP2(printf("****RUN NUMBER %i\n", i+1));
 				Host* owner_host = inHost();
 				start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
 				start_timer_ac = new ProtocolCallbackActivation(this);
@@ -399,12 +458,12 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
 				HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
 			}
 
-		}
-	}
+		//}
+	/*}
 	else
 	{
 		//null
-	}
+	}*/
 
 
   /*Host* owner_host = inHost();
@@ -506,7 +565,7 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 
 
   received = 1; //ASV
-  decrease_aux();
+  //decrease_aux();
 
   UDP_DUMP(printf("[host=\"%s\"] %s: session_proc(), socket %d "
 		  "received %d bytes (%d bytes left).\n",
@@ -523,12 +582,51 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 
   if(show_report)
   {
-    char buf1[50]; char buf2[50];
+    /*char buf1[50]; char buf2[50];
     double total_time = inHost()->t2d(getNow() - cnt->start_time, 0);
+    printf("Connection to server succeed?: ");
+	if(received)
+	{
+		printf("Yes (with j=%i)\n",j-1);
+	}
+	else
+	{
+		printf("No\n");
+	}
     printf("%s: UDP client \"%s\" downloaded %d bytes from server \"%s\", throughput %f Kb/s.\n",
 	   getNowWithThousandSeparator(), IPPrefix::ip2txt(client_ip, buf1), file_size,
-	   IPPrefix::ip2txt(server_ip, buf2), (8e-3 * file_size / total_time ));
+	   IPPrefix::ip2txt(server_ip, buf2), (8e-3 * file_size / total_time ));*/
+
+	//if (j!=1)
+	if (true)
+	{
+		ofstream myfile;
+		std::string fileName = "results/" + std::string(inHost()->nhi.toString());
+		myfile.open (fileName.c_str());
+		char buf1[50]; char buf2[50];
+		double total_time = inHost()->t2d(getNow() - cnt->start_time, 0);
+		myfile << "Connection to server succeed?: ";
+		if(received)
+		{
+			myfile << "Yes (with j=" << j-1 << ")\n";
+		}
+		else
+		{
+			myfile << "No\n";
+		}
+
+		myfile << "Client downloaded " << file_size << " bytes from the server. Throughput: " << (8e-3 * file_size / total_time ) << " Kb/s.\n";
+		myfile << "Total time: " << total_time << " seconds\n";
+
+		myfile.close();
+	}
+
   }
+
+
+  //myfile << "Writing this to a file.\n";
+
+
 
   HandlePtr hptr(new Handle(cnt->user_timer));
   hptr->cancel();
@@ -545,7 +643,7 @@ void UDPClientSession::session_closed(UDPClientSessionContinuation* const cnt)
 		  inHost()->nhi.toString(), getNowWithThousandSeparator(), cnt->socket));
 
 
-  main_proc(true, 0);  //*ASV*  ==> Commented so there is only one send
+  //main_proc(true, 0);  //*ASV*  ==> Commented so there is only one send
 
   // the continuation will be reclaimed after this
 }
