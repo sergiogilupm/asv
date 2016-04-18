@@ -128,6 +128,8 @@ class UDPClientSession: public ProtocolSession {
   int J_MAX;
   int total_bandwidth;
 
+  int aggregated_time;
+
   //int REQ_max;
 
 

@@ -64,6 +64,7 @@ class UDPClientSession: public ProtocolSession {
   /** Storing the data for the callback function. In this case, the UDPClientSession object is stored. */
   bool start_timer_called_once;
 
+  void end_of_request_wave(Activation ac); //ASV
  protected:
   // functions representing different stages
   /** the first function to call for starting a communication at client side */
@@ -84,6 +85,8 @@ class UDPClientSession: public ProtocolSession {
   void decrease_aux(); //ASV
   /** Get a server ip and port randomly from traffic description and
       return false if failed to do so. */
+
+  void restart_timer();
 
   bool get_random_server(IPADDR& server_ip, uint16& server_port);
 

@@ -8,7 +8,7 @@ int main()
 
 
 
-	int clients = 200;
+	int clients = 1550;
 	int waves = clients / 50;
 
 	std::ofstream myfile;

@@ -135,6 +135,7 @@ class UDPServerSession: public ProtocolSession {
   //UDPServerSessionContinuation* reservoir;
   int array_iter;
   int processing_reservoir;
+  int req_count;
 
   // state variables
   SocketMaster* sm; ///< Point to the socket master.

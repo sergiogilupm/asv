@@ -18,9 +18,6 @@
 #include <fstream>
 
 
-#define UDP_DEBUG
-#define UDP_DEBUG2
-
 
 #ifdef UDP_DEBUG
 #define UDP_DUMP(x) printf("UDPCLT: "); x
@@ -302,7 +299,8 @@ void UDPClientSession::init()
   received = 0;
 
   total_bandwidth = 0;  
-
+  aggregated_time = 0;
+  
   j = 0;
   J_MAX = 1024;
 
@@ -604,7 +602,7 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 		std::string fileName = "results/" + std::string(inHost()->nhi.toString());
 		myfile.open (fileName.c_str());
 		char buf1[50]; char buf2[50];
-		double total_time = inHost()->t2d(getNow() - cnt->start_time, 0);
+		double total_time = inHost()->t2d(getNow() - cnt->start_time, 0) + j - 1;
 		myfile << "Connection to server succeed?: ";
 		if(received)
 		{
@@ -615,7 +613,7 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 			myfile << "No\n";
 		}
 
-		myfile << "Client downloaded " << file_size << " bytes from the server. Throughput: " << (8e-3 * file_size / total_time ) << " Kb/s.\n";
+		myfile << "Client downloaded " << file_size << " bytes from the server. Throughput: " << (8e-3 * file_size / total_time ) * j << " Kb/s.\n";
 		myfile << "Total time: " << total_time << " seconds\n";
 
 		myfile.close();

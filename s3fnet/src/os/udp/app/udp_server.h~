@@ -97,7 +97,7 @@ class UDPServerSession: public ProtocolSession {
   void add_to_array(UDPServerSessionContinuation* cnt);
 
 
-  void replace_in_array(UDPServerSessionContinuation* const cnt,int pos);
+  void replace_in_array(UDPServerSessionContinuation* const cnt);
 
   void restart_timer();
 
