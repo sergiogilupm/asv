@@ -67,6 +67,8 @@ class UDPAttackerSession: public ProtocolSession {
 
   void end_of_request_wave(Activation ac);
 
+  void end_of_attack(Activation ac);
+
  protected:
   // functions representing different stages
   /** the first function to call for starting a communication at Attacker side */
@@ -110,6 +112,7 @@ class UDPAttackerSession: public ProtocolSession {
   ltime_t start_window; ///< Size of random window before session starts.
   double start_window_double;
   ltime_t user_timeout;  ///< timeout before aborting a session
+  ltime_t attack_time;
   ltime_t off_time; ///< Off time between sessions.
   double off_time_double;
   bool off_time_run_first; ///< Whether 1st session starts with an off time.

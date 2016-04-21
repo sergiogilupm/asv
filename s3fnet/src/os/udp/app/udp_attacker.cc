@@ -198,6 +198,19 @@ void UDPAttackerSession::config(s3f::dml::Configuration *cfg)
   else user_timeout_double = 100; //default is 100 s
   user_timeout = inHost()->d2t(user_timeout_double, 0);
 
+
+  double attack_time_double;
+  str = (char*)cfg->findSingle("attack_time");
+  if(str)
+  {
+    if(s3f::dml::dmlConfig::isConf(str))
+      error_quit("ERROR: UDPAttackerSession::config(), invalid attack_time attribute.\n");
+    attack_time_double = atof(str);
+  }
+  else attack_time_double = 100; //default is 100 s
+  attack_time = inHost()->d2t(attack_time_double, 0);
+
+
   str = (char*)cfg->findSingle("off_time");
   if(!str || s3f::dml::dmlConfig::isConf(str))
     error_quit("ERROR: UDPAttackerSession::config(), missing or invalid OFF_TIME attribute.\n");
@@ -337,6 +350,8 @@ void UDPAttackerSession::init()
   HandleCode h = inHost()->waitFor( start_timer_callback_window, ac, 40000, inHost()->tie_breaking_seed ); //currently the starting time is 0
   handle_client(ssock);*/
 
+
+
   /***** ASV ****/
   Host* owner_host = inHost();
   start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPAttackerSession::end_of_request_wave);
@@ -344,9 +359,31 @@ void UDPAttackerSession::init()
   Activation ac (start_timer_ac);
   HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, off_time_run_first, owner_host->tie_breaking_seed );
 
+  /***** Finisher ****/
+  //Host* owner_host = inHost();
+  start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPAttackerSession::end_of_attack);
+  start_timer_ac = new ProtocolCallbackActivation(this);
+  Activation  ac2 (start_timer_ac);
+  h = owner_host->waitFor( start_timer_callback_proc, ac2,   attack_time, owner_host->tie_breaking_seed );
+
   // 6 ceros
   //main_proc(off_time_run_first, start_time);   //ASV => DEACTIVATED
 }
+
+
+void UDPAttackerSession::end_of_attack(Activation ac)
+{
+  //UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
+  //server->start_on();
+  UDP_DUMP2(printf("Sending new wave of request to server\n"));
+  UDPAttackerSession* attacker = (UDPAttackerSession*)((ProtocolCallbackActivation*)ac)->session;
+
+
+  /*Restarting timer for next wave */
+
+  return;
+}
+
 
 
 void UDPAttackerSession::end_of_request_wave(Activation ac)

@@ -1,0 +1,104 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdlib.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+using namespace std;
+
+
+
+
+	float average_time;
+	float average_throughput;
+
+int readFile(string fileName)
+{
+
+	ifstream myReadFile;
+	myReadFile.open(fileName.c_str());
+	float single_time = 0;
+	float single_throughput = 0;
+	string output;
+	if (myReadFile.is_open()) 
+	{
+
+		getline(myReadFile,output); // Saves the line in STRING.
+		getline(myReadFile,output); 
+		//total_time = atoi(output.c_str());
+		single_time = stof(output);
+		getline(myReadFile,output); 
+		//throughput = atoi(output.c_str());
+		single_throughput = stof(output);
+
+	}
+
+	myReadFile.close();
+
+	average_time += single_time;
+	average_throughput  += single_throughput;
+
+
+	printf("Total time is: %f\n", single_time);
+	printf("Throuhput is: %f\n", single_throughput);
+
+
+
+	return 0;
+}
+
+
+
+int main()
+{
+	int dir_count = 0;
+	int total_clients = 1500;
+
+	ifstream fin;
+	string dir, filepath;
+	DIR *dp;
+	struct dirent *dirp;
+	struct stat filestat;
+	dp = opendir( "results" );
+	if (dp == NULL)
+	{
+		cout << "Error(" << errno << ") opening " << endl;
+		return errno;
+	}
+	else
+	{
+		dirp = readdir( dp );
+		dirp = readdir( dp );
+
+		while ((dirp = readdir( dp )))
+		{
+			dir_count++;
+			filepath = dir + "results/" + dirp->d_name;
+			printf("File is %s\n", filepath.c_str());
+			readFile(filepath);
+		// If the file is a directory (or is in some way invalid) we'll skip it 
+		//if (stat( filepath.c_str(), &filestat )) continue;
+		//if (S_ISDIR( filestat.st_mode ))         continue;
+
+		// Endeavor to read a single number from the file and display it
+		/*fin.open( filepath.c_str() );
+		if (fin >> num)
+		cout << filepath << ": " << num << endl;
+		fin.close();*/
+		}
+	}
+
+	float successClients = (float) dir_count / (float) total_clients;
+
+	printf("**SUCESS RATE: %f\n", successClients);
+	printf("**AVERAGE TIME: %f seconds\n", average_time / dir_count);
+	printf("**AVERAGE THROUGHPUT: %f seconds\n", average_throughput / dir_count);
+
+	return 0;
+}
+
+
+

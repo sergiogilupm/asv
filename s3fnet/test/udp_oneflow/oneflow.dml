@@ -36,9 +36,12 @@ dict [
       interface [ id 1 _extends .dict.iface ]
       interface [ id 2 _extends .dict.iface ]
 
-      interface [ idrange [from 3 to 1502] _extends .dict.iface ]
 
-	#interface [ idrange [from 153 to 203] _extends .dict.iface ]
+	### HOST INSTANTIATION ###
+
+      interface [ idrange [from 3 to 1602] _extends .dict.iface ]
+
+
 
     ]
 
@@ -426,15 +429,15 @@ dict [
 
 	#### ATTACKER INSTANTIATION GOES HERE ####
 
-#   host [ idrange [from 1503 to 1552]
-#     graph [
-#	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPAttacker" _extends .dict.udp_attacker_setup ]
-#	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
-#	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
- #       ProtocolSession [ name ip use "S3F.OS.IP" ]
-#      ]
-#      interface [ id 0 _extends .dict.iface ]
-#    ]
+   host [ idrange [from 1503 to 1602]
+     graph [
+	ProtocolSession [ name app use "S3F.OS.UDP.test.UDPAttacker" _extends .dict.udp_attacker_setup ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
+        ProtocolSession [ name ip use "S3F.OS.IP" ]
+      ]
+      interface [ id 0 _extends .dict.iface ]
+    ]
 
 	#### ATTACKER INSTANTIATION ENDS HERE ####
 
@@ -1949,6 +1952,106 @@ dict [
     link [ attach 0(1501) attach 1501(0) min_delay 256e-6 prop_delay 0.1 ]
     link [ attach 0(1502) attach 1502(0) min_delay 256e-6 prop_delay 0.1 ]
 
+    link [ attach 0(1503) attach 1503(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1504) attach 1504(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1505) attach 1505(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1506) attach 1506(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1507) attach 1507(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1508) attach 1508(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1509) attach 1509(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1510) attach 1510(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1511) attach 1511(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1512) attach 1512(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1513) attach 1513(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1514) attach 1514(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1515) attach 1515(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1516) attach 1516(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1517) attach 1517(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1518) attach 1518(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1519) attach 1519(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1520) attach 1520(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1521) attach 1521(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1522) attach 1522(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1523) attach 1523(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1524) attach 1524(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1525) attach 1525(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1526) attach 1526(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1527) attach 1527(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1528) attach 1528(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1529) attach 1529(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1530) attach 1530(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1531) attach 1531(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1532) attach 1532(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1533) attach 1533(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1534) attach 1534(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1535) attach 1535(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1536) attach 1536(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1537) attach 1537(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1538) attach 1538(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1539) attach 1539(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1540) attach 1540(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1541) attach 1541(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1542) attach 1542(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1543) attach 1543(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1544) attach 1544(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1545) attach 1545(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1546) attach 1546(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1547) attach 1547(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1548) attach 1548(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1549) attach 1549(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1550) attach 1550(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1551) attach 1551(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1552) attach 1552(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1553) attach 1553(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1554) attach 1554(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1555) attach 1555(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1556) attach 1556(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1557) attach 1557(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1558) attach 1558(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1559) attach 1559(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1560) attach 1560(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1561) attach 1561(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1562) attach 1562(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1563) attach 1563(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1564) attach 1564(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1565) attach 1565(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1566) attach 1566(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1567) attach 1567(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1568) attach 1568(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1569) attach 1569(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1570) attach 1570(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1571) attach 1571(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1572) attach 1572(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1573) attach 1573(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1574) attach 1574(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1575) attach 1575(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1576) attach 1576(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1577) attach 1577(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1578) attach 1578(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1579) attach 1579(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1580) attach 1580(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1581) attach 1581(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1582) attach 1582(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1583) attach 1583(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1584) attach 1584(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1585) attach 1585(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1586) attach 1586(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1587) attach 1587(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1588) attach 1588(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1589) attach 1589(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1590) attach 1590(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1591) attach 1591(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1592) attach 1592(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1593) attach 1593(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1594) attach 1594(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1595) attach 1595(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1596) attach 1596(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1597) attach 1597(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1598) attach 1598(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1599) attach 1599(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1600) attach 1600(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1601) attach 1601(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1602) attach 1602(0) min_delay 256e-6 prop_delay 0.1 ]
 
 	#### LINKS END HERE ####
 
@@ -2489,8 +2592,8 @@ dict [
     off_time 10      			# time to wait between sessions
     off_time_exponential false		# constant or exponential off time?
     off_time_run_first  false 		# whether 1st session starts with an off time
-    user_timeout 1      		# timeout before aborting a session  
-
+    user_timeout 10      		# timeout before aborting a session  
+    attack_time 30
     #fixed_server false			# whether to find a random target, if fixed_server is true, 
 					# the client connects with the same server for the whole simulation; 
 					# the server is chosen from randomly from dml traffic description;
@@ -2516,6 +2619,6 @@ dict [
     send_interval 0.4			# time between successive sends, default is 0, 900Mb/s
     #total_num_packets 10000		# total number of packets to send, default is 0
     #packet_size 1500			# in byte
-    #show_report true    		# print client-server session summary report
+    show_report true    		# print client-server session summary report
   ]
 ]
