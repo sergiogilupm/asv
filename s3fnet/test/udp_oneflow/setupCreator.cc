@@ -7,7 +7,7 @@ int main()
 {
 
 
-	int attackers = 100;
+	int attackers = 500;
 	int clients = 1550;
 	int waves = clients / 50;
 

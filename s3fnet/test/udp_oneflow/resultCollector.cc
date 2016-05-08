@@ -14,6 +14,8 @@ using namespace std;
 
 	float average_time;
 	float average_throughput;
+	float higest_time = -1;
+	float lowest_time = -1;
 
 int readFile(string fileName)
 {
@@ -30,6 +32,24 @@ int readFile(string fileName)
 		getline(myReadFile,output); 
 		//total_time = atoi(output.c_str());
 		single_time = stof(output);
+		/*if (higest_time || lowest_time == -1)
+		{
+			lowest_time = single_time;
+			higest_time = single_time;
+		}
+		else
+		{
+			if(single_time < lowest_time)
+			{
+				lowest_time = single_time;
+			}
+			
+			if (single_time > higest_time)
+			{
+				higest_time = single_time;
+			}
+	
+		}*/
 		getline(myReadFile,output); 
 		//throughput = atoi(output.c_str());
 		single_throughput = stof(output);
@@ -93,9 +113,12 @@ int main()
 
 	float successClients = (float) dir_count / (float) total_clients;
 
+	printf("\n\n++++ RESULTS +++++\n");
 	printf("**SUCESS RATE: %f\n", successClients);
 	printf("**AVERAGE TIME: %f seconds\n", average_time / dir_count);
-	printf("**AVERAGE THROUGHPUT: %f seconds\n", average_throughput / dir_count);
+	//printf("\t+Highest time: %f seconds\n", higest_time);
+	//printf("\t+Lowest time: %f seconds\n", lowest_time);
+	printf("**AVERAGE THROUGHPUT: %f MB/s\n", average_throughput / dir_count);
 
 	return 0;
 }

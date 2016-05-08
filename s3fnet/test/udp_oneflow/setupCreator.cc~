@@ -7,7 +7,7 @@ int main()
 {
 
 
-
+	int attackers = 100;
 	int clients = 1550;
 	int waves = clients / 50;
 
@@ -16,7 +16,7 @@ int main()
 	myfile.open (fileName.c_str());
 
 
-    	for (int i = 0; i < clients; i++)
+    	for (int i = 0; i < clients + attackers; i++)
 	{
 		myfile << "    link [ attach 0(";
 		myfile << i + 3;

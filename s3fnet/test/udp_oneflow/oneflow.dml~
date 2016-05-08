@@ -2069,10 +2069,13 @@ dict [
       interface [ id 2 _extends .dict.iface ]
     ]
 
+    ]
+
+
     host [ id 1
       graph [
         ProtocolSession [ name app use "S3F.OS.UDP.test.UDPServer" _extends .dict.udp_server_setup ]
-	 ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
+	ProtocolSession [ name socket use "S3F.OS.Socket.SocketMaster" ]
         ProtocolSession [ name udp use "S3F.OS.UDP.udpSessionMaster" _find .dict.udpinit ]
         ProtocolSession [ name ip use "S3F.OS.IP" ]
       ]
@@ -2086,7 +2089,12 @@ dict [
       interface [ id 0 _extends .dict.iface ]
     ]
 
-    link [ attach 0(1) attach 1(0) min_delay 256e-6 prop_delay 5 ]
+    #link [ attach 0(1) attach 1(0) min_delay 256e-6 prop_delay 0.1 ]
+    link [ attach 0(1) attach 1(0) min_delay 256e-6 prop_delay 0.1 ]
+
+
+
+
     link [ attach 0(2) attach 2(0) min_delay 256e-6 prop_delay 0.1 ]
   ]
 

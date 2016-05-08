@@ -1,8 +1,9 @@
 /**
- * \file udp_client.cc
- * \brief Source file for the UDPClientSession class.
+ * \file udp_client.cc  
+ * \brief Source file for the UDPClientSession class with the Adaptive Selective Verification protocol implemented, modified by Sergio Gil.
  *
- * authors : Dong (Kevin) Jin
+ * authors : Dong (Kevin) Jin, Sergio Gil 
+ *
  */
 
 #include "os/udp/app/udp_client.h"
@@ -304,8 +305,6 @@ void UDPClientSession::init()
   j = 0;
   J_MAX = 1024;
 
-  //REQ_max = 10;
-
   ProtocolSession::init();
 
   client_ip = inHost()->getDefaultIP();
@@ -346,8 +345,6 @@ void UDPClientSession::init()
 
 void UDPClientSession::end_of_request_wave(Activation ac)
 {
-  //UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
-  //server->start_on();
   UDP_DUMP2(printf("Client request wave finished\n"));
   UDPClientSession* client = (UDPClientSession*)((ProtocolCallbackActivation*)ac)->session;
 
@@ -423,52 +420,28 @@ void UDPClientSession::main_proc(int sample_off_time, ltime_t lead_time)
   }
 
         UDP_DUMP2(printf("Aux is %i\n", aux));
-	//if (aux == 0)
-	//{
 
-		/*** Setting up j */
-		counter = pow(2,j);
+	/*** Setting up j */
+	counter = pow(2,j);
 
-
-		/*if (received == 1)
-		{
-			UDP_DUMP2(printf("Packet received. Success\n"));
-			return;
-		}
-		else
-		{*/
-			if (counter > J_MAX)
-			{
-				UDP_DUMP2(printf("MAX limit reached. Aborting...\n"));
-				return;
-			}
-			
-			aux = counter;
-			j++;
-			
-			for (int i = 0; i < counter; i++)
-			{
-				UDP_DUMP2(printf("****RUN NUMBER %i\n", i+1));
-				Host* owner_host = inHost();
-				start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
-				start_timer_ac = new ProtocolCallbackActivation(this);
-				Activation ac (start_timer_ac);
-				HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
-			}
-
-		//}
-	/*}
-	else
+	if (counter > J_MAX)
 	{
-		//null
-	}*/
-
-
-  /*Host* owner_host = inHost();
-  start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
-  start_timer_ac = new ProtocolCallbackActivation(this);
-  Activation ac (start_timer_ac);
-  HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );*/
+		UDP_DUMP2(printf("MAX limit reached. Aborting...\n"));
+		return;
+	}
+	
+	aux = counter;
+	j++;
+	
+	for (int i = 0; i < counter; i++)
+	{
+		UDP_DUMP2(printf("****RUN NUMBER %i\n", i+1));
+		Host* owner_host = inHost();
+		start_timer_callback_proc = new Process( (Entity *)owner_host, (void (s3f::Entity::*)(s3f::Activation))&UDPClientSession::start_timer_callback);
+		start_timer_ac = new ProtocolCallbackActivation(this);
+		Activation ac (start_timer_ac);
+		HandleCode h = owner_host->waitFor( start_timer_callback_proc, ac, t, owner_host->tie_breaking_seed );
+	}
 }
 
 void UDPClientSession::start_once()
@@ -580,22 +553,6 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 
   if(show_report)
   {
-    /*char buf1[50]; char buf2[50];
-    double total_time = inHost()->t2d(getNow() - cnt->start_time, 0);
-    printf("Connection to server succeed?: ");
-	if(received)
-	{
-		printf("Yes (with j=%i)\n",j-1);
-	}
-	else
-	{
-		printf("No\n");
-	}
-    printf("%s: UDP client \"%s\" downloaded %d bytes from server \"%s\", throughput %f Kb/s.\n",
-	   getNowWithThousandSeparator(), IPPrefix::ip2txt(client_ip, buf1), file_size,
-	   IPPrefix::ip2txt(server_ip, buf2), (8e-3 * file_size / total_time ));*/
-
-	//if (j!=1)
 	if (true)
 	{
 		ofstream myfile;
@@ -618,7 +575,7 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 		myfile << total_time << "\n";
 
 		//avearge throughput
-		myfile << (8e-3 * file_size / total_time ) * j << "\n";
+		//myfile << (4 * pow(2,j-1)) / 1000 << "\n";
 		
 		//myfile << "Client downloaded " << file_size << " bytes from the server. Throughput: " << (8e-3 * file_size / total_time ) * j << " Kb/s.\n";
 		//myfile << "Total time: " << total_time << " seconds\n";
@@ -627,9 +584,6 @@ void UDPClientSession::data_received(UDPClientSessionContinuation* const cnt)
 	}
 
   }
-
-
-  //myfile << "Writing this to a file.\n";
 
 
 

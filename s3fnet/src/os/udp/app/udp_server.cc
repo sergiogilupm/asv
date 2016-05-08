@@ -1,8 +1,8 @@
 /**
  * \file udp_server.cc
- * \brief Source file for the UDPServerSession class.
+ * \brief Source file for the UDPServerSession class, modified with the Adaptive Selective Verification protocol implementation by Sergio Gil.
  *
- * authors : Dong (Kevin) Jin
+ * authors : Dong (Kevin) Jin, Sergio Gil
  */
 
 #include "os/udp/app/udp_server.h"
@@ -334,15 +334,9 @@ void UDPServerSession::request_handler(UDPServerSessionContinuation* const cnt)
 		}
 
 		add_to_array(cnt);
- 		
-		//process_elements();
-		/*if (array_iter == 10)
-		{
-			request_received(cnt);
-		}*/
-		//else
 
     		handle_client(cnt->server_socket);
+
 		//return;
 		//request_received(cnt);
 	}
@@ -486,8 +480,6 @@ void UDPServerSession::release_reservoir()
 
 void UDPServerSession::end_of_timed_window(Activation ac)
 {
-  //UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
-  //server->start_on();
   UDP_DUMP2(printf("Timed window expired\n"));
   UDPServerSession* server = (UDPServerSession*)((ProtocolCallbackActivation*)ac)->session;
 
@@ -542,7 +534,7 @@ void UDPServerSession::add_to_array(UDPServerSessionContinuation* const cnt)
 void UDPServerSession::replace_in_array(UDPServerSessionContinuation* const cnt)
 {
 
-	/* TODO: Probability of replacing the req with a req inside the reservoir */
+	/* Probability of replacing the req with a req inside the reservoir */
 
 	int min_bound = 0;	
 	int max_bound = array_iter + req_count;
@@ -589,7 +581,6 @@ void UDPServerSession::process_elements()
 	for (int i = 0; i < array_iter; i++)
 	{
 		UDP_DUMP2(printf("+++++++++++++++++++++++Processing element in pos %i\n", i));
-		//request_received(reservoir[i]);
 		client_connected(reservoir[i]);
 	}
 
